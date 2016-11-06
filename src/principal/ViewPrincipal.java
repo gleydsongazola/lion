@@ -45,7 +45,7 @@ public class ViewPrincipal extends javax.swing.JFrame {
         jMenuItemSobre = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("AGFSystem");
+        setTitle("Lion");
         setExtendedState(6);
 
         jMenuAmbiente.setMnemonic('A');

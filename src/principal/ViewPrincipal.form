@@ -70,7 +70,7 @@
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
-    <Property name="title" type="java.lang.String" value="AGFSystem"/>
+    <Property name="title" type="java.lang.String" value="Lion"/>
     <Property name="extendedState" type="int" value="6"/>
   </Properties>
   <SyntheticProperties>
