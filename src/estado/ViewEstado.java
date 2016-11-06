@@ -14,9 +14,10 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import principal.ViewPrincipal;
 import model.ModelEstadoPais;
-import dao.DaoEstadoPais;
 import controller.ControllerEstadoPais;
-import pais.ViewPais;
+import estado.Procurar;
+import pais.ModelPais;
+import pais.ControllerPais;
 
 /**
  *
@@ -329,6 +330,11 @@ public class ViewEstado extends javax.swing.JInternalFrame {
         jButtonLocalizar.setMaximumSize(new java.awt.Dimension(49, 30));
         jButtonLocalizar.setMinimumSize(new java.awt.Dimension(49, 30));
         jButtonLocalizar.setPreferredSize(new java.awt.Dimension(49, 30));
+        jButtonLocalizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonLocalizarActionPerformed(evt);
+            }
+        });
 
         jButtonAdicionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/add.png"))); // NOI18N
         jButtonAdicionar.setMaximumSize(new java.awt.Dimension(49, 30));
@@ -672,6 +678,16 @@ public class ViewEstado extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         ViewPrincipal.iniEstado = false;
     }//GEN-LAST:event_formInternalFrameClosed
+
+    private void jButtonLocalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLocalizarActionPerformed
+        // TODO add your handling code here:
+        Procurar procurar = new Procurar(null, true, "pais");
+        procurar.setVisible(true);
+        if (procurar.getOk()) {
+            jTextCodigoPais.setText(Integer.toString(procurar.getChave()));
+            jTextNomePais.setText(procurar.getDescricao());
+        }
+    }//GEN-LAST:event_jButtonLocalizarActionPerformed
 
     public void setPosicao() {
         Dimension d = this.getDesktopPane().getSize();
