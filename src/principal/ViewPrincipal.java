@@ -7,20 +7,22 @@ package principal;
 
 import pais.ViewPais;
 import estado.ViewEstado;
+import javax.swing.ImageIcon;
 
 /**
  *
- * @author gleyd_000
+ * @author Gleydson Israel
  */
 public class ViewPrincipal extends javax.swing.JFrame {
 
     public static boolean iniPais = false;
     public static boolean iniEstado = false;
-    
+
     /**
      * Creates new form Principal
      */
     public ViewPrincipal() {
+        setIconImage(new ImageIcon(getClass().getResource("/imagens/icone.png")).getImage());
         initComponents();
     }
 

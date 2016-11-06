@@ -1,4 +1,4 @@
-package agfsystem;
+package lion;
 
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -7,9 +7,9 @@ import static sun.io.Win32ErrorMode.initialize;
 
 /**
  *
- * @author gleyd_000
+ * @author Gleydson Israel
  */
-public class AGFSystem {
+public class Lion {
 
     /**
      * @param args the command line arguments
