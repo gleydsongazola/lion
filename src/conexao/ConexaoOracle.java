@@ -20,7 +20,7 @@ public class ConexaoOracle {
 
 
     private String servidor = "jdbc:oracle:thin:@localhost:1521:xe";
-    private String usuario = "MYBIGSYSTEM";
+    private String usuario = "LIONSYS";
     private String senha = "Davi0105";
     
     public ConexaoOracle(){}
