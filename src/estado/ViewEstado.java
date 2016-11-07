@@ -12,12 +12,10 @@ import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
-import principal.ViewPrincipal;
 import model.ModelEstadoPais;
 import controller.ControllerEstadoPais;
-import estado.Procurar;
-import pais.ModelPais;
-import pais.ControllerPais;
+import util.Procurar;
+import util.ControlaView;
 
 /**
  *
@@ -127,7 +125,6 @@ public class ViewEstado extends javax.swing.JInternalFrame {
             public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
             }
             public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
-                formInternalFrameOpened(evt);
             }
         });
 
@@ -327,9 +324,9 @@ public class ViewEstado extends javax.swing.JInternalFrame {
         jTextCodigoPais.setEnabled(false);
 
         jButtonLocalizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/find.png"))); // NOI18N
-        jButtonLocalizar.setMaximumSize(new java.awt.Dimension(49, 30));
-        jButtonLocalizar.setMinimumSize(new java.awt.Dimension(49, 30));
-        jButtonLocalizar.setPreferredSize(new java.awt.Dimension(49, 30));
+        jButtonLocalizar.setMaximumSize(new java.awt.Dimension(30, 30));
+        jButtonLocalizar.setMinimumSize(new java.awt.Dimension(30, 30));
+        jButtonLocalizar.setPreferredSize(new java.awt.Dimension(30, 30));
         jButtonLocalizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonLocalizarActionPerformed(evt);
@@ -337,9 +334,14 @@ public class ViewEstado extends javax.swing.JInternalFrame {
         });
 
         jButtonAdicionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/add.png"))); // NOI18N
-        jButtonAdicionar.setMaximumSize(new java.awt.Dimension(49, 30));
-        jButtonAdicionar.setMinimumSize(new java.awt.Dimension(49, 30));
-        jButtonAdicionar.setPreferredSize(new java.awt.Dimension(49, 30));
+        jButtonAdicionar.setMaximumSize(new java.awt.Dimension(30, 30));
+        jButtonAdicionar.setMinimumSize(new java.awt.Dimension(30, 30));
+        jButtonAdicionar.setPreferredSize(new java.awt.Dimension(30, 30));
+        jButtonAdicionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAdicionarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelIdentificacaoLayout = new javax.swing.GroupLayout(jPanelIdentificacao);
         jPanelIdentificacao.setLayout(jPanelIdentificacaoLayout);
@@ -349,33 +351,32 @@ public class ViewEstado extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanelIdentificacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelIdentificacaoLayout.createSequentialGroup()
-                        .addGroup(jPanelIdentificacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelPais)
-                            .addComponent(jLabelCodigo))
+                        .addComponent(jLabelPais)
+                        .addGap(18, 18, 18)
+                        .addComponent(jTextCodigoPais, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanelIdentificacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTextCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextCodigoPais, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jTextNomePais)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanelIdentificacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanelIdentificacaoLayout.createSequentialGroup()
-                                .addComponent(jTextNomePais)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButtonLocalizar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButtonAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanelIdentificacaoLayout.createSequentialGroup()
-                                .addComponent(jLabelDataInclusao)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextDataInclusao, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabelDataInclusao1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextDataAlteracao, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(jButtonLocalizar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelIdentificacaoLayout.createSequentialGroup()
+                        .addComponent(jLabelCodigo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTextCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabelDataInclusao)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextDataInclusao, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabelDataInclusao1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextDataAlteracao, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 144, Short.MAX_VALUE))
                     .addGroup(jPanelIdentificacaoLayout.createSequentialGroup()
                         .addComponent(jLabelNome1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextNome, javax.swing.GroupLayout.DEFAULT_SIZE, 657, Short.MAX_VALUE)))
+                        .addComponent(jTextNome)))
                 .addContainerGap())
         );
         jPanelIdentificacaoLayout.setVerticalGroup(
@@ -391,21 +392,21 @@ public class ViewEstado extends javax.swing.JInternalFrame {
                         .addComponent(jTextCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabelDataInclusao)
                         .addComponent(jTextDataInclusao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(11, 11, 11)
                 .addGroup(jPanelIdentificacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelIdentificacaoLayout.createSequentialGroup()
                         .addGroup(jPanelIdentificacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanelIdentificacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabelPais)
                                 .addComponent(jTextNomePais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jTextCodigoPais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jButtonLocalizar, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jTextCodigoPais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabelPais))
+                            .addComponent(jButtonLocalizar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanelIdentificacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabelNome1)
-                            .addComponent(jTextNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jButtonAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(102, 102, 102))
+                            .addComponent(jTextNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelNome1)))
+                    .addComponent(jButtonAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Identificação", jPanelIdentificacao);
@@ -448,7 +449,7 @@ public class ViewEstado extends javax.swing.JInternalFrame {
                 .addGroup(jPanelDadosFiscaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelSigla)
                     .addComponent(jTextSigla, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(59, Short.MAX_VALUE))
+                .addContainerGap(69, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Informações Adicionais", jPanelDadosFiscais);
@@ -552,7 +553,7 @@ public class ViewEstado extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, Short.MAX_VALUE))
+                .addComponent(jTabbedPane1))
         );
 
         getAccessibleContext().setAccessibleDescription("Cadastro de Estado");
@@ -669,14 +670,9 @@ public class ViewEstado extends javax.swing.JInternalFrame {
         this.dispose();
     }//GEN-LAST:event_close
 
-    private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
-        // TODO add your handling code here:
-        ViewPrincipal.iniEstado = true;
-    }//GEN-LAST:event_formInternalFrameOpened
-
     private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
         // TODO add your handling code here:
-        ViewPrincipal.iniEstado = false;
+        ControlaView.viewEstado = null;
     }//GEN-LAST:event_formInternalFrameClosed
 
     private void jButtonLocalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLocalizarActionPerformed
@@ -688,6 +684,11 @@ public class ViewEstado extends javax.swing.JInternalFrame {
             jTextNomePais.setText(procurar.getDescricao());
         }
     }//GEN-LAST:event_jButtonLocalizarActionPerformed
+
+    private void jButtonAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdicionarActionPerformed
+        // TODO add your handling code here:
+        ControlaView.criaViewPais();
+    }//GEN-LAST:event_jButtonAdicionarActionPerformed
 
     public void setPosicao() {
         Dimension d = this.getDesktopPane().getSize();
@@ -758,8 +759,8 @@ public class ViewEstado extends javax.swing.JInternalFrame {
                 jMenuItemAccept.setEnabled(true);
                 jMenuItemRefresh.setEnabled(false);
 
-                jTextCodigoPais.setEditable(true);
-                jTextCodigoPais.setEnabled(true);
+                //jTextCodigoPais.setEditable(true);
+                //jTextCodigoPais.setEnabled(true);
                 jTextNome.setEditable(true);
                 jTextCodigoIbge.setEditable(true);
                 jTextSigla.setEditable(true);
@@ -786,8 +787,8 @@ public class ViewEstado extends javax.swing.JInternalFrame {
                 jMenuItemAccept.setEnabled(true);
                 jMenuItemRefresh.setEnabled(false);
 
-                jTextCodigoPais.setEditable(false);
-                jTextCodigoPais.setEnabled(false);
+                //jTextCodigoPais.setEditable(false);
+                //jTextCodigoPais.setEnabled(false);
                 jTextNome.setEditable(true);
                 jTextCodigoIbge.setEditable(true);
                 jTextSigla.setEditable(true);
@@ -814,8 +815,8 @@ public class ViewEstado extends javax.swing.JInternalFrame {
                 jMenuItemAccept.setEnabled(false);
                 jMenuItemRefresh.setEnabled(true);
 
-                jTextCodigoPais.setEditable(false);
-                jTextCodigoPais.setEnabled(false);
+                //jTextCodigoPais.setEditable(false);
+                //jTextCodigoPais.setEnabled(false);
                 jTextNome.setEditable(false);
                 jTextCodigoIbge.setEditable(false);
                 jTextSigla.setEditable(false);
@@ -842,8 +843,8 @@ public class ViewEstado extends javax.swing.JInternalFrame {
                 jMenuItemAccept.setEnabled(false);
                 jMenuItemRefresh.setEnabled(true);
 
-                jTextCodigoPais.setEditable(false);
-                jTextCodigoPais.setEnabled(false);
+                //jTextCodigoPais.setEditable(false);
+                //jTextCodigoPais.setEnabled(false);
                 jTextNome.setEditable(false);
                 jTextCodigoIbge.setEditable(false);
                 jTextSigla.setEditable(false);

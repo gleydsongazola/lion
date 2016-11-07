@@ -1,22 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package principal;
 
-import pais.ViewPais;
-import estado.ViewEstado;
 import javax.swing.ImageIcon;
+import util.ControlaView;
 
 /**
  *
  * @author Gleydson Israel
  */
 public class ViewPrincipal extends javax.swing.JFrame {
-
-    public static boolean iniPais = false;
-    public static boolean iniEstado = false;
 
     /**
      * Creates new form Principal
@@ -114,22 +105,12 @@ public class ViewPrincipal extends javax.swing.JFrame {
 
     private void jMenuItemPaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemPaisActionPerformed
         // TODO add your handling code here:
-        if (!iniPais) {
-            ViewPais pais = new ViewPais();
-            desktopPane.add(pais);
-            pais.setVisible(true);
-            pais.setPosicao();
-        }
+        ControlaView.criaViewPais();
     }//GEN-LAST:event_jMenuItemPaisActionPerformed
 
     private void jMenuItemEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemEstadoActionPerformed
         // TODO add your handling code here:
-        if (!iniEstado) {
-            ViewEstado estado = new ViewEstado();
-            desktopPane.add(estado);
-            estado.setVisible(true);
-            estado.setPosicao();
-        }
+        ControlaView.criaViewEstado();
     }//GEN-LAST:event_jMenuItemEstadoActionPerformed
 
     /**
@@ -169,7 +150,7 @@ public class ViewPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JDesktopPane desktopPane;
+    public static javax.swing.JDesktopPane desktopPane;
     private javax.swing.JMenu jMenuAjuda;
     private javax.swing.JMenu jMenuAmbiente;
     private javax.swing.JMenuItem jMenuItemEstado;

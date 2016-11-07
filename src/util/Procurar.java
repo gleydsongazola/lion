@@ -3,39 +3,37 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package estado;
+package util;
 
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
-import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
+import java.awt.event.KeyEvent;
 import pais.*;
 
 /**
  *
- * @author Gleydson
+ * @author Gleydson Israel
  */
-public class Procurar extends javax.swing.JDialog {
+public final class Procurar extends javax.swing.JDialog {
 
-    private String tabelaConsulta;
+    private final String tabelaConsulta;
     private boolean ok = false;
     private int chave;
     private String descricao;
 
     public int getChave() {
         return chave;
-    };
-    
+    }
+
     public boolean getOk() {
         return ok;
     }
-    
+
     public String getDescricao() {
         return descricao;
     }
@@ -54,6 +52,7 @@ public class Procurar extends javax.swing.JDialog {
         this.tabelaConsulta = pTabelaConsulta;
         carregaInformacoes();
         jTableListaDados.requestFocus();
+        jTableListaDados.setRowSelectionInterval(0, 0);
     }
 
     public void carregaInformacoes() {
@@ -131,8 +130,9 @@ public class Procurar extends javax.swing.JDialog {
 
     jButtonCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancel.png"))); // NOI18N
     jButtonCancelar.setText("Cancelar");
-    jButtonCancelar.setMaximumSize(new java.awt.Dimension(95, 25));
-    jButtonCancelar.setPreferredSize(new java.awt.Dimension(115, 25));
+    jButtonCancelar.setMaximumSize(new java.awt.Dimension(95, 30));
+    jButtonCancelar.setMinimumSize(new java.awt.Dimension(95, 30));
+    jButtonCancelar.setPreferredSize(new java.awt.Dimension(115, 30));
     jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
             jButtonCancelarActionPerformed(evt);
@@ -141,8 +141,9 @@ public class Procurar extends javax.swing.JDialog {
 
     jButtonConfirmar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/accept.png"))); // NOI18N
     jButtonConfirmar.setText("Confirmar");
-    jButtonConfirmar.setMaximumSize(new java.awt.Dimension(95, 25));
-    jButtonConfirmar.setPreferredSize(new java.awt.Dimension(115, 25));
+    jButtonConfirmar.setMaximumSize(new java.awt.Dimension(95, 30));
+    jButtonConfirmar.setMinimumSize(new java.awt.Dimension(99, 30));
+    jButtonConfirmar.setPreferredSize(new java.awt.Dimension(115, 30));
     jButtonConfirmar.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
             jButtonConfirmarActionPerformed(evt);
@@ -163,7 +164,7 @@ public class Procurar extends javax.swing.JDialog {
     jPanel1Layout.setVerticalGroup(
         jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-            .addContainerGap(13, Short.MAX_VALUE)
+            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(jButtonConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -221,17 +222,27 @@ public class Procurar extends javax.swing.JDialog {
         int indexCol = jComboBoxCampo.getSelectedIndex();
         sorter.setRowFilter(RowFilter.regexFilter("(?i)" + text, indexCol));
         jTableListaDados.requestFocus();
+        jTableListaDados.setRowSelectionInterval(0, 0);
     }//GEN-LAST:event_jTextFieldFiltrarActionPerformed
 
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
         // TODO add your handling code here:
-        int index;
-        index = jTableListaDados.getColumnModel().getColumnIndex("Código");
-        this.chave = (int) jTableListaDados.getValueAt(jTableListaDados.getSelectedRow(), index);
-        index = jTableListaDados.getColumnModel().getColumnIndex("Nome");
-        this.descricao = (String) jTableListaDados.getValueAt(jTableListaDados.getSelectedRow(), index);
-        this.ok = true;
-        this.dispose();
+        int indexRow = jTableListaDados.getSelectedRow();
+        if (indexRow >= 0) {
+            int indexColumn;
+            switch (tabelaConsulta) {
+                default:
+                    indexColumn = jTableListaDados.getColumnModel().getColumnIndex("Código");
+                    this.chave = (int) jTableListaDados.getValueAt(indexRow, indexColumn);
+
+                    indexColumn = jTableListaDados.getColumnModel().getColumnIndex("Nome");
+                    this.descricao = (String) jTableListaDados.getValueAt(indexRow, indexColumn);
+            }
+            this.ok = true;
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(null, "Operação bloqueada. Favor selecionar um registro.", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed

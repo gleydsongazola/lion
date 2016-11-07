@@ -12,11 +12,11 @@ import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
-import principal.ViewPrincipal;
+import util.ControlaView;
 
 /**
  *
- * @author gleyd_000
+ * @author Gleydson Israel
  */
 public class ViewPais extends javax.swing.JInternalFrame {
 
@@ -97,6 +97,7 @@ public class ViewPais extends javax.swing.JInternalFrame {
 
         setTitle("Pais");
         setMinimumSize(new java.awt.Dimension(0, 0));
+        setName("Pais"); // NOI18N
         setPreferredSize(new java.awt.Dimension(752, 400));
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
@@ -113,7 +114,6 @@ public class ViewPais extends javax.swing.JInternalFrame {
             public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
             }
             public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
-                formInternalFrameOpened(evt);
             }
         });
 
@@ -583,14 +583,9 @@ public class ViewPais extends javax.swing.JInternalFrame {
         this.dispose();
     }//GEN-LAST:event_close
 
-    private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
-        // TODO add your handling code here:
-        ViewPrincipal.iniPais = true;
-    }//GEN-LAST:event_formInternalFrameOpened
-
     private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
         // TODO add your handling code here:
-        ViewPrincipal.iniPais = false;
+        ControlaView.viewPais = null;
     }//GEN-LAST:event_formInternalFrameClosed
 
     public void setPosicao() {
